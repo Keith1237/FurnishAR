@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    // State variable to trigger navigation
+    @State private var isNavigating = false
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -16,14 +19,29 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(.white)
-                
-                // Full Screen Navigation Link
-                NavigationLink(destination: OnboardingView()) {
+
+                // Overlay a full-screen invisible button
+                Button(action: {
+                    // Action to navigate
+                    navigateToOnboarding()
+                }) {
                     Color.clear // Invisible overlay that covers the entire screen
+                        .contentShape(Rectangle()) // Ensure it's tappable
                 }
-                .buttonStyle(PlainButtonStyle()) // Disable button styling effects
+                .buttonStyle(PlainButtonStyle()) // Disable default button styling
+                
+                // NavigationLink that gets triggered when `isNavigating` is true
+                NavigationLink(destination: OnboardingView(), isActive: $isNavigating) {
+                    EmptyView() // Empty view, navigation is triggered by state
+                }
             }
         }
+    }
+    
+    // Navigation action
+    func navigateToOnboarding() {
+        // Trigger the navigation
+        isNavigating = true
     }
 }
 
