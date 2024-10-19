@@ -1,21 +1,29 @@
-//
-//  ContentView.swift
-//  FurnishAR
-//
-//  Created by Keith Praveen on 2024-10-15.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            ZStack {
+                // Background Image
+                Image("newImage")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+                    .blur(radius: 10) // Apply blur effect to the image
+                
+                // Centered Text
+                Text("FurnishAR")
+                    .font(.largeTitle)
+                    .bold()
+                    .foregroundColor(.white)
+                
+                // Full Screen Navigation Link
+                NavigationLink(destination: OnboardingView()) {
+                    Color.clear // Invisible overlay that covers the entire screen
+                }
+                .buttonStyle(PlainButtonStyle()) // Disable button styling effects
+            }
         }
-        .padding()
     }
 }
 
