@@ -2,10 +2,10 @@ import SwiftUI
 
 
 
-struct SignInView: View {
+struct SignUpView: View {
     @State private var email = ""
     @State private var password = ""
-    @State private var rememberMe = false
+    
 
     var body: some View {
      
@@ -24,27 +24,36 @@ struct SignInView: View {
                                     .font(.title2)
                                     //.foregroundColor(.black) // Color of the arrow
                             }
-                            .padding(.leading,0)
+                            .padding(.leading, 0)
                         }
-
                         Spacer()
                     }
                     
                     // Welcome Text
-                    Text("Welcome Back")
+                    Text("Create Account")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding(.top, 20)
                     
-                    Text("Welcome Back! Please Enter Your Details.")
+                    Text("Let’s create account toghter")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                     
+                    //Name Field
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Full Name")
+                            .font(.headline)
+                            .foregroundColor(.black)
+                        TextField("Enter Your Name", text: $email)
+                            .padding()
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
+                    }
                     // Email Field
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Email")
                             .font(.headline)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.black)
                         TextField("Enter Your Email", text: $email)
                             .padding()
                             .background(Color(.systemGray6))
@@ -55,7 +64,7 @@ struct SignInView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Password")
                             .font(.headline)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.black)
                         SecureField("Enter Your Password", text: $password)
                             .padding()
                             .background(Color(.systemGray6))
@@ -63,21 +72,7 @@ struct SignInView: View {
                     }
                     
                     // Remember Me & Forgot Password
-                    HStack {
-                        Toggle("Remember For 30 Days", isOn: $rememberMe)
-                            .toggleStyle(CheckboxToggleStyle())
-                            .font(.footnote)
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            // Action for forgot password
-                        }) {
-                            Text("Forgot Password")
-                                .font(.footnote)
-                                .foregroundColor(.blue)
-                        }
-                    }
+                  
                     
                     // Sign In Button
                     Button(action: {
@@ -101,7 +96,7 @@ struct SignInView: View {
                             Image("google_icon") // Custom Google logo image
                                 .resizable()
                                 .frame(width: 20, height: 20)
-                            Text("Sign In With Google")
+                            Text("Sign up with google")
                                 .font(.headline)
                                 .foregroundColor(.black)
                         }
@@ -113,10 +108,12 @@ struct SignInView: View {
                     
                     // Sign Up Link
                     HStack {
-                        Text("Don’t Have An Account?")
+                        Text("Already have an account?")
                             .foregroundColor(.gray)
-                        NavigationLink(destination: SignUpView()) {
-                            Text("Sign Up For Free")
+                        Button(action: {
+                            // Action for sign up
+                        }) {
+                            Text("Sign in")
                                 .foregroundColor(.blue)
                                 .fontWeight(.bold)
                         }
@@ -135,21 +132,10 @@ struct SignInView: View {
     }
 }
 
-// Custom Toggle Style for Checkbox
-struct CheckboxToggleStyle: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        Button(action: { configuration.isOn.toggle() }) {
-            HStack {
-                Image(systemName: configuration.isOn ? "checkmark.square.fill" : "square")
-                    .foregroundColor(configuration.isOn ? .blue : .gray)
-                configuration.label
-            }
-        }
-    }
-}
 
-struct SignInView_Previews: PreviewProvider {
+
+struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView()
+        SignUpView()
     }
 }
